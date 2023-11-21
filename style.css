@@ -1,26 +1,26 @@
 body{
     background-color: #eee;
-}
-#container{
+  }
+  #container{
     background-color: #fff;
     padding: 20px;
     width: 80%;
     margin: auto;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
     border-radius: 20px;
-}
-h1{
-    font-style: normal;
-}
-p{
+  }
+  h1{
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  p{
     color: #868484;
-}
-form{
+  }
+  form{
     text-align: left;
     margin: 50px;
     font-size:20px;
-}
-input {
+  }
+  input {
     border-color: gray;
     width: 50%;
     padding: 10px;
@@ -28,12 +28,13 @@ input {
     border-radius: 5px;
     margin-right: 10px;
   } 
-
-label{
+  
+  label{
   width: 400px;
   display: inline-block;
-}
-.botao1 {
+  }
+  
+  .botao1 {
     border: solid 1px rgb(238, 231, 37);
     border-radius: 0px;
     color: #fff;
@@ -45,7 +46,7 @@ label{
     margin-left: 900px;
   }
   
-.botao2 {
+  .botao2 {
     border: solid 1px rgb(11, 200, 27);
     border-radius: 0px;
     color: #fff;
@@ -54,3 +55,7 @@ label{
     height: 30px; 
   }
   
+  .botao1:hover, .botao2:hover {
+    background-color: #0e0e0f;
+    border-color: #0d0e0f;
+  }
