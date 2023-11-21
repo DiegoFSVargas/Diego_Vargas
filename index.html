@@ -1,38 +1,96 @@
+<!--Javascript aplicado no forms-->
+<!--Foi usadado um Foreach no P-->
+<!--Aplicado Java para alterra um classe do CSS e mudar cor do P-->
+<!--Aplicado if e else nos dados do forms-->
+<!--Criado função para salvar os dados e outra para apagar o que foi escrito no forms-->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exercicio 6</title>
+    <title>Avaliação JS</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <main id="container">
         <section>
             <h1>Cadastro de Usuário</h1>
-            <p>Preencha o cadastro abaixo para se cadastrar:</p>
+            <p>Preencha as informações abaixo para se cadastrar:</p>
+            <p>Informe apenas dados verdadeiros.</p>
+            <span>
+                <p>*Campos obrigatórios.</p>
+            </span>            
         
-            <form>
-                <label for="nome"><b>Nome:</b></label>
+            <form id="form">
+                <label for="nome"><b>*Nome:</b></label>
                 <input type="text" name="nome" id="nome"><br><br>
-                <label for="email"><b>Email:</b></label>
+                <label for="email"><b>*Email:</b></label>
                 <input type="email" name="email" id="email"><br><br>
-                <label for="senha"><b>Senha:</b></label>
-                <input type="text" name="senha" id="senha"><br><br>
-                <label for="confSenha"><b>Confirmar senha:</b></label>
-                <input type="text" name="confSenha" id="senha"><br><br>
-                <label for="endereço"><b>Cidade:</b></label>
-                <input type="text" name="cidade" id="cidade"><br><br>
-                <label for="telefone"><b>Telefone:</b></label>
-                <input type="text" name="telefone" id="numerico"><br><br>
+                <label for="senha"><b>*Senha:</b></label>
+                <input type="password" name="senha" id="senha"><br><br>
+                <label for="endereço"><b>*Endereço:</b></label>
+                <input type="text" name="endereço" id="endereço"><br><br>
+                <label for="telefone"><b>*Telefone:</b></label>
+                <input type="text" name="telefone" id="telefone"><br><br>
             </form>
             <br>
             <div>
-                <a href="URL"><button class="botao1">Limpar</button></a>
-                <a href="URL"><button class="botao2" onclick="alert('Usuario cadastrado com sucesso')">Cadastrar</button></a>
+                <a href="#"><button class="botao1" onclick="limparFormulario()">Limpar</button></a>
+                <a href="#"><button class="botao2" onclick="salvar()">Salvar</button></a>
             </div>
         </section>
     </main>
     
+    <script>
+
+        const p = document.querySelector("p");
+        const paragrafos = document.querySelectorAll("p");
+        const span = document.querySelector("span");
+
+        paragrafos.forEach(par =>{
+            par.style.color = "red";
+        });
+
+        p.style.color = "green";
+
+        const form = document.getElementById("form");
+        const nome = document.getElementById("nome");
+        const email = document.getElementById("email");
+        const senha = document.getElementById("senha");
+        const endereço = document.getElementById("endereço");
+        const telefone = document.getElementById("telefone");    
+        const key = new URLSearchParams(window.location.search).get("chave");
+
+        var dados = JSON.parse(localStorage.getItem("dados")) || [];
+
+        if (key) {
+            nome.value = dados[key].nome;
+            email.value = dados[key].email;
+            senha.value = dados[key].senha;
+            endereço.value = dados[key].endereço;
+            telefone.value = dados[key].telefone;
+        }
+
+        function salvar() {
+            let novoNome = nome.value;
+            let novoEmail = email.value;
+            let novoSenha = senha.value;
+            let novoEndereço = endereço.value;
+            let novoTelefone = telefone.value;
+
+            if (key) {
+                dados[key] = {nome: novoNome, email: novoEmail, senha: novoSenha, endereço: novoEndereço, telefone: novoTelefone};
+            } else {
+                dados.push({nome: novoNome, email: novoEmail, senha: novoSenha, endereço: novoEndereço, telefone: novoTelefone});
+            }
+
+            localStorage.setItem("dados", JSON.stringify(dados));
+            form.reset();
+        }
+
+        function limparFormulario() {
+            form.reset();
+        }
+    </script>
 </body>
 </html>
